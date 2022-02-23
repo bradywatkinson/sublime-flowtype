@@ -44,7 +44,7 @@ def is_js_source(view):
     )
 
 
-def get_settings(setting, default=None):
+def get_settings(key, default=None):
     """Get settings."""
     settings = global_sublime.load_settings("FlowType.sublime-settings")
     value = global_settings.get(key)
