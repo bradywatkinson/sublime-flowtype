@@ -46,9 +46,17 @@ def is_js_source(view):
 
 def get_settings(setting, default=None):
     """Get settings."""
-    settings = sublime.load_settings("FlowType.sublime-settings")
+    settings = global_sublime.load_settings("FlowType.sublime-settings")
+    value = global_settings.get(key)
 
-    return settings.get(setting, default)
+    # Load active project settings
+    project_settings = sublime.active_window().active_view().settings()
+
+    # Overwrite global config value if it's defined
+    if project_settings.has("FlowType"):
+      value = project_settings.get("FlowType").get(key, value)
+
+    return value
 
 
 def prepare_arguments(view):
